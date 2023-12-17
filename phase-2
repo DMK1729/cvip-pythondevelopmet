@@ -1,0 +1,46 @@
+#typing speed tester
+import random
+import time
+import string
+
+
+word_list = ['apple', 'banana', 'cherry', 'date', 'elderberry', 'fig', 'grape', 'honeydew', 'kiwi', 'lemon', 'mango', 'nectarine', 'orange', 'papaya', 'pineapple', 'quince', 'raspberry', 'strawberry', 'tomato', 'ugli', 'fruit', 'and', 'even', 'some', 'fake', 'words', 'for', 'the', 'purpose', 'of', 'testing', 'a', 'typist']
+
+def get_random_word():
+    """Get a random word from the word list."""
+    return random.choice(word_list)
+
+def test_typing_speed():
+    """Test the typing speed of the user."""
+    print("\nTyping Speed Tester\n")
+
+   
+    random_sequence = " ".join(get_random_word() for _ in range(50))
+    print("Please type the following text as accurately and as quickly as possible. The words you type will be underlined.")
+    print("\n", random_sequence, "\n")
+
+    start_time = time.time()
+
+    user_input = input()
+
+    end_time = time.time()
+
+    
+    time_taken = end_time - start_time
+
+   
+    words_per_minute = (len(user_input.split()) / time_taken) * 60
+
+    print("\nYour typing speed is approximately", words_per_minute, "words per minute.")
+
+    
+    accuracy = (sum(1 for u, o in zip(user_input.split(), random_sequence.split()) if u == o) / len(random_sequence.split())) * 100
+    print("Your accuracy was", accuracy, "%.")
+
+    if accuracy == 100:
+        print("Great job! Keep practicing to improve your speed and accuracy.")
+    else:
+        print("There are some errors in your typing. Try to correct them and improve your accuracy.")
+
+if __name__ == "__main__":
+    test_typing_speed()
