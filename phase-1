@@ -34,7 +34,7 @@ def generate_password(password_requirements):
     for i in range(password_requirements['length'] - 4):
         password += random.choice(all_chars)
 
-    password = ''.join(random.sample(password, len(password))) # shuffle the password characters
+    password = ''.join(random.sample(password, len(password))) 
     return password
 
 def main():
