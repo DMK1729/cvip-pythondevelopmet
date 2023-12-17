@@ -1,0 +1,46 @@
+#Random password generator
+import random
+import string
+
+def get_password_requirements():
+    print("Welcome to the Random Password Generator!")
+    length = int(input("Please enter the desired password length (8 to 128): "))
+    include_lowercase = bool(int(input("Include lowercase letters? (1 = yes, 0 = no): ")))
+    include_uppercase = bool(int(input("Include uppercase letters? (1 = yes, 0 = no): ")))
+    include_numbers = bool(int(input("Include numbers? (1 = yes, 0 = no): ")))
+    include_special_chars = bool(int(input("Include special characters? (1 = yes, 0 = no): ")))
+    password_requirements = {
+        'length': length,
+        'include_lowercase': include_lowercase,
+        'include_uppercase': include_uppercase,
+        'include_numbers': include_numbers,
+        'include_special_chars': include_special_chars,
+    }
+    return password_requirements
+
+def generate_password(password_requirements):
+    all_chars = string.ascii_letters + string.digits + string.punctuation
+    password = ''
+
+    if password_requirements['include_lowercase']:
+        password += random.choice(string.ascii_lowercase)
+    if password_requirements['include_uppercase']:
+        password += random.choice(string.ascii_uppercase)
+    if password_requirements['include_numbers']:
+        password += random.choice(string.digits)
+    if password_requirements['include_special_chars']:
+        password += random.choice(string.punctuation)
+
+    for i in range(password_requirements['length'] - 4):
+        password += random.choice(all_chars)
+
+    password = ''.join(random.sample(password, len(password))) # shuffle the password characters
+    return password
+
+def main():
+    password_requirements = get_password_requirements()
+    password = generate_password(password_requirements)
+    print(f"Generated password: {password}")
+
+if __name__ == "__main__":
+    main()
